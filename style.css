@@ -1,0 +1,82 @@
+:root {
+    --primary-color: #23ad96;
+}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.primary {
+    color: var(--primary-color);
+}
+.container {
+    width: 80%;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.container h1 {
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    font-size: 6rem;
+}
+#form {
+    margin-top: 3rem;
+    width: 90%;
+}
+#form input {
+    width: 100%;
+    font-size: 2rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 0.25rem;
+    padding: 0.5rem 1rem;
+    outline: none;
+}
+#form input:focus {
+    border: 1px solid rgb(173, 173, 173);
+}
+#form > div {
+    margin-top: 1.5rem;
+}
+.container table {
+    border-collapse: collapse;
+    margin-top: 4rem;
+    width: 90%;
+    table-layout: fixed;
+    border-radius: 2px;
+    font-size: 1.9rem;
+}
+.container table td,
+.container table th {
+    /* border: 1px #ccc solid; */
+    text-align: center;
+    padding: 1rem 1rem;
+    overflow: hidden;
+}
+.container table th {
+    border: 1px solid #ccc;
+}
+.container table thead,
+.container table tbody {
+    border: 1px solid #ccc;
+}
+#x-btn i{
+    /* background-color: red; */
+    color: red;
+    cursor: pointer;
+    width: 70%;
+    height: 70%;
+}
