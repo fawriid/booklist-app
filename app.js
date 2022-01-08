@@ -42,34 +42,46 @@ form.addEventListener("submit", (eve) => {
     let bookAuthor = author.value;
     let bookIsbn = isbn.value;
 
-    const book1 = new book(bookTitle, bookAuthor, bookIsbn);
+    isThere = false;
+    let lsBooks = JSON.parse(localStorage.getItem("books"));
+    lsBooks.forEach((e) => {
+        if (e.isbn === bookIsbn) {
+            isThere = true;
+        }
+    });
 
-    const row = document.createElement("tr");
-    row.innerHTML = `
+    if (isThere) {
+        alert("Can not save book with same isbn!", "red");
+    } else {
+        const book1 = new book(bookTitle, bookAuthor, bookIsbn);
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
         <td>${book1.title}</td>
         <td>${book1.author}</td>
         <td>${book1.isbn}</td>
         <td id="x-btn"><i class="fas fa-trash"></i></td>
     `;
 
-    if (bookTitle && bookAuthor && bookIsbn) {
-        title.value = "";
-        author.value = "";
-        isbn.value = "";
+        if (bookTitle && bookAuthor && bookIsbn) {
+            title.value = "";
+            author.value = "";
+            isbn.value = "";
 
-        const xbtn = row.querySelector("#x-btn");
-        xbtn.addEventListener("click", (e) => {
-            e.target.parentElement.parentElement.remove();
-            removeFromStore(book1.isbn);
-            alert("Book removed successfully!", "green");
-        });
+            const xbtn = row.querySelector("#x-btn");
+            xbtn.addEventListener("click", (e) => {
+                e.target.parentElement.parentElement.remove();
+                removeFromStore(book1.isbn);
+                alert("Book removed successfully!", "green");
+            });
 
-        bookList.appendChild(row);
-        alert("Book added!", "green");
+            bookList.appendChild(row);
+            alert("Book added!", "green");
 
-        addToStore(book1);
-    } else {
-        alert("Please fill all the inputs!", "red");
+            addToStore(book1);
+        } else {
+            alert("Please fill all the inputs!", "red");
+        }
     }
 });
 function addToStore(book) {
