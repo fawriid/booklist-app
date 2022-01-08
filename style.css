@@ -14,6 +14,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 .primary {
     color: var(--primary-color);
@@ -109,4 +110,11 @@ body {
 }
 .alert.green{
     background:green;
+}
+
+.site-author{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1.5rem;
 }
