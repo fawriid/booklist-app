@@ -3,6 +3,27 @@ class book {
         (this.title = title), (this.author = author), (this.isbn = isbn);
     }
 }
+window.addEventListener("DOMContentLoaded", () => {
+    const books = JSON.parse(localStorage.getItem("books"));
+    console.log(books);
+    books.forEach((e) => {
+        const book1 = new book(e.title, e.author, e.isbn);
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${book1.title}</td>
+        <td>${book1.author}</td>
+        <td>${book1.isbn}</td>
+        <td id="x-btn"><i class="fas fa-trash"></i></td>
+    `;
+        const xbtn = row.querySelector("#x-btn");
+        xbtn.addEventListener("click", (e) => {
+            e.target.parentElement.parentElement.remove();
+            alert("Book removed successfully!", "green");
+        });
+        bookList.appendChild(row);
+    });
+});
 
 const container = document.querySelector(".container");
 
@@ -39,17 +60,28 @@ form.addEventListener("submit", (eve) => {
         const xbtn = row.querySelector("#x-btn");
         xbtn.addEventListener("click", (e) => {
             e.target.parentElement.parentElement.remove();
-            alert("Book removed successfully!","green")
+            alert("Book removed successfully!", "green");
         });
 
         bookList.appendChild(row);
-        alert("Book added!", "green")
+        alert("Book added!", "green");
 
+        addToStore(book1);
     } else {
-        alert("Please fill all the inputs!", "red")
+        alert("Please fill all the inputs!", "red");
     }
 });
-
+function addToStore(book) {
+    if (localStorage.getItem("books")) {
+        let books = JSON.parse(localStorage.getItem("books"));
+        books.push(book);
+        localStorage.setItem("books", JSON.stringify(books));
+    } else {
+        let books = [];
+        books.push(book);
+        localStorage.setItem("books", JSON.stringify(books));
+    }
+}
 
 function alert(msg, color) {
     const div = document.createElement("div");
@@ -62,10 +94,3 @@ function alert(msg, color) {
         div.remove();
     }, 2000);
 }
-
-
-
-// <td>Title</td>
-// <td>Autdor</td>
-// <td>ISBN</td>
-// <td id="x-btn"><i class="fas fa-trash"></i></td>
