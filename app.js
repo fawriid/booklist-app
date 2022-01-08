@@ -5,7 +5,6 @@ class book {
 }
 window.addEventListener("DOMContentLoaded", () => {
     const books = JSON.parse(localStorage.getItem("books"));
-    console.log(books);
     books.forEach((e) => {
         const book1 = new book(e.title, e.author, e.isbn);
 
@@ -19,6 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const xbtn = row.querySelector("#x-btn");
         xbtn.addEventListener("click", (e) => {
             e.target.parentElement.parentElement.remove();
+            removeFromStore(book1.isbn);
             alert("Book removed successfully!", "green");
         });
         bookList.appendChild(row);
@@ -60,6 +60,7 @@ form.addEventListener("submit", (eve) => {
         const xbtn = row.querySelector("#x-btn");
         xbtn.addEventListener("click", (e) => {
             e.target.parentElement.parentElement.remove();
+            removeFromStore(book1.isbn);
             alert("Book removed successfully!", "green");
         });
 
@@ -81,6 +82,15 @@ function addToStore(book) {
         books.push(book);
         localStorage.setItem("books", JSON.stringify(books));
     }
+}
+function removeFromStore(isbn) {
+    let books = JSON.parse(localStorage.getItem("books"));
+    books.forEach((e, index) => {
+        if (e.isbn === isbn) {
+            books.splice(index, 1);
+        }
+    });
+    localStorage.setItem("books", JSON.stringify(books));
 }
 
 function alert(msg, color) {
