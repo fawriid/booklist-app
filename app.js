@@ -48,7 +48,7 @@ form.addEventListener("submit", (eve) => {
     let bookIsbn = isbn.value;
 
     isThere = false;
-    if (!(JSON.parse(localStorage.getItem("books")).length === 0)) {
+    if (!((JSON.parse(localStorage.getItem("books"))).length === 0)) {
         let lsBooks = JSON.parse(localStorage.getItem("books"));
         lsBooks.forEach((e) => {
             if (e.isbn === bookIsbn) {
