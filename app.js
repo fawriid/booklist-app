@@ -24,10 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
             });
             bookList.appendChild(row);
         });
-    } else {
-        let books = []
-        localStorage.setItem("books", books)
-    }
+    } 
 });
 
 const container = document.querySelector(".container");
@@ -48,8 +45,8 @@ form.addEventListener("submit", (eve) => {
     let bookIsbn = isbn.value;
 
     isThere = false;
-    let lsBooks = JSON.parse(localStorage.getItem("books"));
-    if (!(lsBooks.length === 0)) {
+    if (localStorage.getItem("books")) {
+        let lsBooks = JSON.parse(localStorage.getItem("books"));
         lsBooks.forEach((e) => {
             if (e.isbn === bookIsbn) {
                 isThere = true;
