@@ -4,25 +4,30 @@ class book {
     }
 }
 window.addEventListener("DOMContentLoaded", () => {
-    const books = JSON.parse(localStorage.getItem("books"));
-    books.forEach((e) => {
-        const book1 = new book(e.title, e.author, e.isbn);
+    if (localStorage.getItem("books")) {
+        const books = JSON.parse(localStorage.getItem("books"));
+        books.forEach((e) => {
+            const book1 = new book(e.title, e.author, e.isbn);
 
-        const row = document.createElement("tr");
-        row.innerHTML = `
+            const row = document.createElement("tr");
+            row.innerHTML = `
         <td>${book1.title}</td>
         <td>${book1.author}</td>
         <td>${book1.isbn}</td>
         <td id="x-btn"><i class="fas fa-trash"></i></td>
     `;
-        const xbtn = row.querySelector("#x-btn");
-        xbtn.addEventListener("click", (e) => {
-            e.target.parentElement.parentElement.remove();
-            removeFromStore(book1.isbn);
-            alert("Book removed successfully!", "green");
+            const xbtn = row.querySelector("#x-btn");
+            xbtn.addEventListener("click", (e) => {
+                e.target.parentElement.parentElement.remove();
+                removeFromStore(book1.isbn);
+                alert("Book removed successfully!", "green");
+            });
+            bookList.appendChild(row);
         });
-        bookList.appendChild(row);
-    });
+    } else {
+        let books = []
+        localStorage.setItem("books", books)
+    }
 });
 
 const container = document.querySelector(".container");
