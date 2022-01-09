@@ -48,12 +48,14 @@ form.addEventListener("submit", (eve) => {
     let bookIsbn = isbn.value;
 
     isThere = false;
-    let lsBooks = JSON.parse(localStorage.getItem("books"));
-    lsBooks.forEach((e) => {
-        if (e.isbn === bookIsbn) {
-            isThere = true;
-        }
-    });
+    if (!(JSON.parse(localStorage.getItem("books")).length === 0)) {
+        let lsBooks = JSON.parse(localStorage.getItem("books"));
+        lsBooks.forEach((e) => {
+            if (e.isbn === bookIsbn) {
+                isThere = true;
+            }
+        });
+    }
 
     if (isThere) {
         alert("Can not save book with same isbn!", "red");
